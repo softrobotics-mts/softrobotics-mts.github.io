@@ -1,413 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Towards Reproducibility in Soft Robotics: Manufacturing, Testing, and Simulation - RoboSoft 2026 Workshop">
-    <title>Reproducibility in Soft Robotics Workshop | RoboSoft 2026</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<title>RoboSoft 2026 Workshop – Reproducibility in Soft Robotics</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        background-color: #f5f7fa;
+        color: #222;
+        line-height: 1.6;
+    }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
+    header {
+        background-color: #1f2a44;
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+    }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
+    header h1 {
+        margin-bottom: 8px;
+    }
 
-        header .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            opacity: 0.95;
-        }
+    nav {
+        background-color: #ffffff;
+        border-bottom: 1px solid #ddd;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
-        header .conference {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 10px;
+        gap: 25px;
+        flex-wrap: wrap;
+    }
 
-        /* Navigation */
-        nav {
-            background-color: #2d3748;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+    nav a {
+        text-decoration: none;
+        color: #1f2a44;
+        font-weight: bold;
+    }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    nav a:hover {
+        text-decoration: underline;
+    }
 
-        nav ul li {
-            margin: 0 1.5rem;
-        }
+    main {
+        max-width: 960px;
+        margin: auto;
+        padding: 25px 20px;
+    }
 
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
+    section {
+        background: white;
+        padding: 25px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
 
-        nav ul li a:hover {
-            color: #667eea;
-        }
+    h2 {
+        color: #1f2a44;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 4px;
+    }
 
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
 
-        section {
-            margin-bottom: 4rem;
-        }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+    }
 
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #2d3748;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 0.5rem;
-        }
+    th {
+        background-color: #f4f6f8;
+    }
 
-        h3 {
-            font-size: 1.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            color: #4a5568;
-        }
+    ul {
+        margin-left: 20px;
+    }
 
-        p {
-            margin-bottom: 1rem;
-            text-align: justify;
-        }
+    .info-box {
+        background-color: #f8f9fb;
+        border-left: 4px solid #1f2a44;
+        padding: 15px;
+        margin: 15px 0;
+    }
 
-        /* Alert Box */
-        .alert {
-            background-color: #fef5e7;
-            border-left: 4px solid #f39c12;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border-radius: 4px;
-        }
-
-        .alert h3 {
-            margin-top: 0;
-            color: #d68910;
-        }
-
-        /* Important Dates */
-        .dates-list {
-            list-style: none;
-            background-color: #f7fafc;
-            padding: 2rem;
-            border-radius: 8px;
-        }
-
-        .dates-list li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .dates-list li:last-child {
-            border-bottom: none;
-        }
-
-        .dates-list strong {
-            color: #667eea;
-        }
-
-        /* Organizers Grid */
-        .organizers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .organizer {
-            text-align: center;
-            padding: 1.5rem;
-            background-color: #f7fafc;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .organizer:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .organizer h4 {
-            margin-bottom: 0.5rem;
-            color: #2d3748;
-        }
-
-        .organizer .affiliation {
-            color: #718096;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .organizer a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .organizer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Topics List */
-        .topics-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .topics-list li {
-            background-color: #edf2f7;
-            padding: 1rem;
-            border-radius: 4px;
-            list-style: none;
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .topics-list li:before {
-            content: "→";
-            position: absolute;
-            left: 0.75rem;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #2d3748;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            header .subtitle {
-                font-size: 1.1rem;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 0.5rem 0;
-            }
-
-            .dates-list li {
-                flex-direction: column;
-            }
-        }
-    </style>
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 0.9em;
+    }
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>Towards Reproducibility in Soft Robotics</h1>
-        <p class="subtitle">Addressing Concerns in Manufacturing, Testing, and Simulation</p>
-        <p class="conference">Workshop at IEEE RoboSoft 2026 | Date TBD | Location TBD</p>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#topics">Topics</a></li>
-            <li><a href="#submission">Submission</a></li>
-            <li><a href="#dates">Important Dates</a></li>
-            <li><a href="#program">Program</a></li>
-            <li><a href="#organizers">Organizers</a></li>
-        </ul>
-    </nav>
+<header>
+    <h1>Towards Reproducibility in Soft Robotics</h1>
+    <p><strong>Manufacturing · Testing · Simulation</strong></p>
+    <p>Half-day Workshop @ IEEE RoboSoft 2026 (Kanazawa, Japan)</p>
+</header>
 
-    <div class="container">
-        <section id="about">
-            <h2>About the Workshop</h2>
-            <p>
-                Soft robotics has emerged as a transformative field, offering unique advantages in human-robot interaction, 
-                adaptability, and safe operation in unstructured environments. However, the field faces significant challenges 
-                in reproducibility across three critical domains: manufacturing, testing, and simulation.
-            </p>
-            <p>
-                This workshop brings together researchers, practitioners, and industry experts to address the fundamental 
-                question: How can we establish reproducible practices in soft robotics that enable reliable comparison of 
-                results, validation of findings, and acceleration of scientific progress?
-            </p>
-            <p>
-                By focusing on the interconnected challenges of fabrication variability, standardized testing protocols, 
-                and simulation-to-reality gaps, we aim to develop a roadmap for making soft robotics a more rigorous and 
-                reproducible scientific discipline.
-            </p>
-        </section>
+<nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#program">Program</a></li>
+        <li><a href="#cfp">Call for Contributions</a></li>
+        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="#organizers">Organizers</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-        <section id="topics">
-            <h2>Topics of Interest</h2>
-            <p>We welcome contributions addressing, but not limited to, the following topics:</p>
-            
-            <h3>Manufacturing & Fabrication</h3>
-            <ul class="topics-list">
-                <li>Reproducible fabrication protocols for soft actuators and sensors</li>
-                <li>Material characterization and standardization</li>
-                <li>Quality control and consistency in soft robot manufacturing</li>
-                <li>Open-source fabrication methods and documentation</li>
-                <li>Batch-to-batch variability analysis</li>
-            </ul>
+<main>
 
-            <h3>Testing & Benchmarking</h3>
-            <ul class="topics-list">
-                <li>Standardized testing protocols for soft robots</li>
-                <li>Benchmark tasks and performance metrics</li>
-                <li>Experimental design for reproducible results</li>
-                <li>Uncertainty quantification in soft robotics experiments</li>
-                <li>Open datasets and experimental protocols</li>
-            </ul>
+<section id="home">
+<h2>Overview</h2>
 
-            <h3>Simulation & Modeling</h3>
-            <ul class="topics-list">
-                <li>Validation of soft robot simulators</li>
-                <li>Sim-to-real transfer in soft robotics</li>
-                <li>Model parameter identification and validation</li>
-                <li>Multi-physics simulation frameworks</li>
-                <li>Benchmarking simulation tools</li>
-            </ul>
+<div class="info-box">
+<strong>When:</strong> TBA &nbsp; | &nbsp;
+<strong>Where:</strong> RoboSoft 2026 &nbsp; | &nbsp;
+<strong>Duration:</strong> Half Day
+</div>
 
-            <h3>Cross-Cutting Themes</h3>
-            <ul class="topics-list">
-                <li>Open-source hardware and software for reproducibility</li>
-                <li>Data sharing and documentation best practices</li>
-                <li>Community standards and guidelines</li>
-                <li>Reproducibility in soft robot learning and control</li>
-                <li>Case studies of reproducibility challenges and solutions</li>
-            </ul>
-        </section>
+<p>
+Reproducibility remains a major challenge in soft robotics due to variability in
+materials, fabrication processes, experimental protocols, and simulation assumptions.
+This workshop brings together researchers to discuss challenges and practical
+approaches for improving reproducibility across the soft robotics pipeline.
+</p>
 
-        <section id="submission">
-            <h2>Submission Guidelines</h2>
-            <div class="alert">
-                <h3>Call for Papers</h3>
-                <p>Submission details will be announced soon. Please check back for updates.</p>
-            </div>
-            
-            <p>We invite submissions in the following categories:</p>
-            <ul>
-                <li><strong>Full Papers:</strong> 6-8 pages describing original research, case studies, or position papers</li>
-                <li><strong>Extended Abstracts:</strong> 2-4 pages describing work in progress, preliminary results, or novel ideas</li>
-                <li><strong>Demonstrations:</strong> 2-page abstract describing a hardware or software demonstration</li>
-            </ul>
-            
-            <p>
-                All submissions should follow the IEEE conference format. Accepted papers will be made available on the 
-                workshop website. We encourage authors to make their code, data, and fabrication files publicly available 
-                to promote reproducibility.
-            </p>
-        </section>
+<h3>Why Attend?</h3>
+<ul>
+    <li>Learn best practices for reproducible fabrication and testing</li>
+    <li>Understand limitations and validation strategies in soft robot simulation</li>
+    <li>Engage with researchers shaping reproducibility standards</li>
+</ul>
+</section>
 
-        <section id="dates">
-            <h2>Important Dates</h2>
-            <ul class="dates-list">
-                <li>
-                    <span>Submission Deadline</span>
-                    <strong>TBD</strong>
-                </li>
-                <li>
-                    <span>Notification of Acceptance</span>
-                    <strong>TBD</strong>
-                </li>
-                <li>
-                    <span>Camera-Ready Deadline</span>
-                    <strong>TBD</strong>
-                </li>
-                <li>
-                    <span>Workshop Date</span>
-                    <strong>TBD (RoboSoft 2026)</strong>
-                </li>
-            </ul>
-            <p style="margin-top: 1rem; font-style: italic; color: #718096;">
-                All deadlines are 23:59 Anywhere on Earth (AoE)
-            </p>
-        </section>
+<section id="program">
+<h2>Program (Tentative)</h2>
 
-        <section id="program">
-            <h2>Program</h2>
-            <p>
-                The workshop program will feature invited talks from leading researchers, contributed presentations, 
-                panel discussions, and interactive demonstrations. Detailed program will be announced closer to the event.
-            </p>
-            
-            <h3>Invited Speakers</h3>
-            <p style="color: #718096; font-style: italic;">To be announced</p>
-        </section>
+<table>
+<tr><th>Time</th><th>Activity</th></tr>
+<tr><td>09:00 – 09:10</td><td>Opening & Introduction</td></tr>
+<tr><td>09:10 – 10:30</td><td>Invited Talks</td></tr>
+<tr><td>10:30 – 11:30</td><td>Contributed Talks / Posters</td></tr>
+<tr><td>11:30 – 12:15</td><td>Panel Discussion</td></tr>
+<tr><td>12:15 – 12:30</td><td>Wrap-up</td></tr>
+</table>
+</section>
 
-        <section id="organizers">
-            <h2>Organizers</h2>
-            <div class="organizers-grid">
-                <div class="organizer">
-                    <h4>Ricardo de Azambuja</h4>
-                    <p class="affiliation">Ritsumeikan University, Japan</p>
-                    <a href="mailto:email@example.com">Contact</a>
-                </div>
-                <div class="organizer">
-                    <h4>Laura Blumenschein</h4>
-                    <p class="affiliation">Purdue University, USA</p>
-                    <a href="mailto:email@example.com">Contact</a>
-                </div>
-                <!-- Add more organizers as needed -->
-                <div class="organizer">
-                    <h4>Additional Organizers</h4>
-                    <p class="affiliation">TBD</p>
-                </div>
-            </div>
-        </section>
-    </div>
+<section id="cfp">
+<h2>Call for Contributions</h2>
 
-    <footer>
-        <p>&copy; 2026 Reproducibility in Soft Robotics Workshop. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
-            <a href="https://github.com/softrobotics-mts" style="color: #9fa6b2; text-decoration: none;">GitHub</a>
-        </p>
-    </footer>
+<p>
+We invite extended abstracts related to reproducibility in soft robotics,
+including manufacturing, testing, and simulation.
+</p>
+
+<ul>
+    <li>Length: 2–4 pages</li>
+    <li>Format: IEEE conference style</li>
+    <li>Review: Single-blind</li>
+    <li>Presentation: Oral or poster</li>
+</ul>
+
+<h3>Important Dates</h3>
+<ul>
+    <li>Submission Deadline: TBA</li>
+    <li>Acceptance Notification: TBA</li>
+    <li>Camera-Ready Submission: TBA</li>
+</ul>
+</section>
+
+<section id="speakers">
+<h2>Invited Speakers</h2>
+<p>To be announced.</p>
+</section>
+
+<section id="organizers">
+<h2>Organizers</h2>
+<ul>
+    <li>Ricardo Rosales – Ritsumeikan University, Japan</li>
+    <li>David Howard – CSIRO, Australia</li>
+    <li>Hannibal Paul – Ritsumeikan University, Japan</li>
+    <li>Laura Blumenschein – Purdue University, USA</li>
+    <li>Hongying Zhang – National University of Singapore</li>
+</ul>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>
+For questions regarding the workshop:<br>
+<strong>organizer@university.edu</strong>
+</p>
+</section>
+
+</main>
+
+<footer>
+IEEE RoboSoft 2026 · Half-day Workshop
+</footer>
+
 </body>
 </html>
