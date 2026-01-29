@@ -20,7 +20,7 @@ body {
 
 /* ---------- TITLE ---------- */
 .title-box {
-    background: linear-gradient(135deg, #7fc8d6, #9fe0c3);
+    background: linear-gradient(135deg, #7fc8d6, #9fe0d7);
     border-radius: 40px;
     padding: 70px 40px;
     text-align: center;
@@ -74,18 +74,25 @@ body {
     margin-bottom: 70px;
 }
 
-.nav a {
+.nav a,
+.nav button {
     padding: 10px 22px;
     border-radius: 999px;
     background: #cfe6eb;
     color: #083344;
     text-decoration: none;
     font-size: 14px;
+
+    border: none;
+    font: inherit;
+    cursor: pointer;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav button:hover {
     background: #b7dbe2;
 }
+
 
 /* ---------- SECTIONS ---------- */
 section {
@@ -176,6 +183,12 @@ td {
     font-size: 14px;
     color: #555;
 }
+
+/* ---------- SMOOTH SCROLL ---------- */
+html {
+  scroll-behavior: smooth;
+}
+
 </style>
 </head>
 
@@ -208,6 +221,7 @@ td {
 </div>
 
 <!-- NAV -->
+ <!--
 <div class="nav">
     <a href="#abstract">Abstract</a>
     <a href="#topics">Topics</a>
@@ -217,6 +231,40 @@ td {
     <a href="#organizers">Organizers</a>
     <a href="#contact">Contact</a>
 </div>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', () => {
+    setTimeout(() => {
+      history.replaceState(null, null, ' ');
+    }, 10);
+  });
+});
+</script>
+-->
+
+<div class="nav">
+  <button onclick="scrollToSection('abstract')">Abstract</button>
+  <!-- <button onclick="scrollToSection('topics')">Topics</button>-->
+  <button onclick="scrollToSection('speakers')">Invited Speakers</button>
+  <button onclick="scrollToSection('schedule')">Program</button>
+  <button onclick="scrollToSection('posters')">Call for Posters</button>
+  <button onclick="scrollToSection('organizers')">Organizers</button>
+  <button onclick="scrollToSection('contact')">Contact</button>
+</div>
+
+<script>
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
+</script>
+
+
+
+
 
 <!-- ABSTRACT -->
 <section id="abstract">
@@ -279,13 +327,19 @@ components.
 <table>
 <tr><th>Time</th><th>Session</th><th>Topic</th></tr>
 <tr><td>08:45</td><td>Introduction</td><td></td></tr>
-<tr><td>09:00</td><td>Interactive Activity</td><td>Hands-on</td></tr>
-<tr><td>09:40</td><td>Tania Morimoto</td><td>Medical</td></tr>
+<tr><td>09:00</td><td>Interactive Reproducibility Activity</td><td>Hands-on</td></tr>
+<tr><td>09:40</td><td>Tania Morimoto</td><td>Medical Field</td></tr>
 <tr><td>09:50</td><td>Nana Obayashi</td><td>Field environments</td></tr>
 <tr><td>10:00</td><td>Kait Becker</td><td>Manufacturing</td></tr>
 <tr><td>10:10</td><td>Perla Maiolino</td><td>Sensing</td></tr>
-<tr><td>10:20</td><td>Coffee & Posters</td><td></td></tr>
-<tr><td>11:10</td><td>Invited Talks</td><td>Simulation & benchmarking</td></tr>
+<tr><td>10:20</td><td>Coffee Break & Poster Session</td><td></td></tr>
+<tr><td>10:50</td><td>Case Study and Discussion</td><td></td></tr>
+<tr><td>11:10</td><td>Andrea Cherubini</td><td>Simulation and Experimental Challenges of Vision-based Soft Object Manipulation</td></tr>
+<tr><td>11:20</td><td>Robert Katzschmann</td><td>Toward High-Fidelity Simulation and Practical Benchmarking for Soft and Anthropomorphic Robots</td></tr>
+<tr><td>11:30</td><td>Florian T. Pokorny</td><td>Scalable Real-World Benchmarking for Deformable Object Manipulation</td></tr>
+<tr><td>11:40</td><td>Bin Fang</td><td>Soft Contact Simulation and Manipulation Learning with Tacchi</td></tr>
+<tr><td>11:50</td><td>Cosimo Della Santina</td><td>TBA</td></tr>
+<tr><td>12:00</td><td>Zeyang Xia</td><td>Morphological Design Methodologies of Soft Robots</td></tr>
 <tr><td>12:10</td><td>Panel Discussion</td><td></td></tr>
 <tr><td>12:50</td><td>Wrap-up & Photo</td><td></td></tr>
 </table>
@@ -332,7 +386,7 @@ Submission details will be announced.
 <div class="section-box">
 <h3>Contact</h3>
 <p>
-Ricardo Rosales – jrosales[at mark]fc.ritsumei.ac.jp<br>
+Ricardo Rosales – rjrosales[at-mark]fc.ritsumei.ac.jp<br>
 </p>
 </div>
 </section>
