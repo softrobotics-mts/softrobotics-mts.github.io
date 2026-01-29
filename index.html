@@ -189,6 +189,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ---------- @ ICON SIZE ---------- */
+.at-icon {
+    /* height: 1.2em;*/
+    vertical-align: middle;
+}
+
+
 </style>
 </head>
 
@@ -220,29 +227,6 @@ html {
     📅 <strong>Date:</strong> TBD
 </div>
 
-<!-- NAV -->
- <!--
-<div class="nav">
-    <a href="#abstract">Abstract</a>
-    <a href="#topics">Topics</a>
-    <a href="#speakers">Invited Speakers</a>
-    <a href="#schedule">Program</a>
-    <a href="#posters">Call for Posters</a>
-    <a href="#organizers">Organizers</a>
-    <a href="#contact">Contact</a>
-</div>
-
-<script>
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', () => {
-    setTimeout(() => {
-      history.replaceState(null, null, ' ');
-    }, 10);
-  });
-});
-</script>
--->
-
 <div class="nav">
   <button onclick="scrollToSection('abstract')">Abstract</button>
   <!-- <button onclick="scrollToSection('topics')">Topics</button>-->
@@ -261,9 +245,6 @@ function scrollToSection(id) {
   });
 }
 </script>
-
-
-
 
 
 <!-- ABSTRACT -->
@@ -298,6 +279,13 @@ components.
 </ul>
 </div>
 </section>
+
+<script>
+document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+});
+</script>
+
 
 <!-- SPEAKERS -->
 <section id="speakers">
@@ -367,7 +355,7 @@ Submission details will be announced.
 <h3>Organizers</h3>
 
 <div class="people-grid">
-    <div class="person"><img src="images/ricardo.jpg" alt="Ricardo Rosales"><h4>Ricardo Rosales</h4><div class="affil">Ritsumeikan University, Japan</div></div>
+    <div class="person"><img src="images/ricardo.jpg" draggable="false" alt="Ricardo Rosales"><h4>Ricardo Rosales</h4><div class="affil">Ritsumeikan University, Japan</div></div>
     <div class="person"><img><h4>David Howard</h4><div class="affil">CSIRO</div></div>
     <div class="person"><img><h4>Hannibal Paul</h4><div class="affil">Ritsumeikan University, Japan</div></div>
     <div class="person"><img><h4>Laura Blumenschein</h4><div class="affil">Purdue University</div></div>
@@ -386,7 +374,7 @@ Submission details will be announced.
 <div class="section-box">
 <h3>Contact</h3>
 <p>
-Ricardo Rosales – rjrosales[at-mark]fc.ritsumei.ac.jp<br>
+Ricardo Rosales - rjrosales<img src="images/at_mark.png" class="at-icon" draggable="false">fc.ritsumei.ac.jp
 </p>
 </div>
 </section>
