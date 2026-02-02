@@ -138,6 +138,30 @@ section p {
     color: #083344;    
 }
 
+/* ---------- SUBMIT BUTTON ---------- */
+
+.submit-button-wrapper {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.submit-button {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    background: #aa2909;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.submit-button:hover {
+    background: #b7dbe2;
+    transform: translateY(-1px);
+}
+
 
 
 
@@ -379,17 +403,27 @@ document.addEventListener('contextmenu', function (e) {
       contribution, its context, and relevance to reproducible research.
       All submissions will undergo a <strong>peer-review process</strong> and
       will be evaluated based on technical quality, clarity, relevance to the
-      workshop theme, and their potential to stimulate discussion.
+      workshop theme, and their potential to stimulate discussion. 
+      Submissions must be prepared using the standard IEEE two-column format 
+      (US letter size). LaTeX and MS Word templates can be found on the 
+      <a href="https://ras.papercept.net/conferences/support/support.php" style="text-decoration: underline;" target="_blank"> 
+      IEEE RAS paper submission support page </a>.
     </p>
 
     <p>
       The submission and review process will be managed via
-      <strong>OpenReview</strong> (submission link to be announced).
+      <strong>OpenReview</strong>.
       All accepted contributions will be presented <strong>in person</strong>
       during the <strong>interactive poster sessions</strong> and discussion
       periods within the workshop.
     </p>
 
+    <div class="submit-button-wrapper">
+     <a href="https://openreview.net/group?id=IEEE.org/RoboSoft/2026/Workshop/Reproducibility_Soft_Robotics" target="_blank" class="submit-button"> 
+    <!--  <a href="https://softrobotics-mts.github.io/" target="_blank" class="submit-button"> -->
+    Submit via OpenReview
+  </a>
+</div>
 
     <p class="subheading">Submission information:</p>
     <ul>
